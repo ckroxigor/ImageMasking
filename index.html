@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
+
+		<script type="text/javascript" src="js/main.js"></script>
+		<title>Masking your images made easy!</title>
+	</head>
+	<body>
+		<div class="container" ng-controller="ImgConf">
+			<h1>Masking your images made easy!</h1>
+			<div class="row">
+				<div class="col-md-7">
+					<svg version="1.1" viewBox="0 0 100 100" style="width:100%; height:100%">
+						<defs>
+							<pattern id="textPattern" width="{{getTextWidth()}}" height="{{font_size}}" patternUnits="userSpaceOnUse">
+								<text id="svgTextObject" x="0" y="{{font_size}}" fill="rgba(255,255,255,1)" font-size="{{font_size}}">{{mask_text}}</text>
+							</pattern>
+						</defs>
+						<mask id="mask">
+							<rect x="0" y="0" width="100" height="100" fill="url(#textPattern)"/>
+						</mask>
+						<rect x="0" y="0" width="100" height="100" fill="{{getBgColor()}}"/>
+						<image xlink:href="http://www.w3.org/html/logo/downloads/HTML5_Logo_512.png" ng-xlink-href="{{src_url}}"
+							x="0" y="0" height="100" width="100" mask="url(#mask)"/>
+						<text id="svgHiddenText" x="10" y="150" fill="rgba(255,0,0,2)" font-size="{{font_size}}">{{mask_text}}</text>
+					</svg>
+				</div>
+				<div class="col-md-5">
+					<div class="panel panel-primary">
+						<div class="panel-heading">Tools</div>
+						<div class="panel-body">
+							
+							<from role="form">
+								<div class="form-group">
+									<label>URL</label>
+									<input type="text" ng-model="src_url" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>Pattern</label>
+									<input type="text" ng-model="mask_text">
+									<div class="btn-group">
+										<button type="button" class="btn btn-default" ng-click="reduceFontSize()">-</button>
+										<button type="button" class="btn btn-default">{{font_size}}</button>
+										<button type="button" class="btn btn-default" ng-click="increaseFontSize()">+</button>
+									</div>
+								</div>
+								<div class="form-group">
+									<label>Background color</label>
+									<input type="text" ng-model="bgcolor[0]" size="2">
+									<input type="text" ng-model="bgcolor[1]" size="2">
+									<input type="text" ng-model="bgcolor[2]" size="2">
+								</div>
+								
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- <svg version="1.1" viewBox="0 0 100 100" style="width:500px; height:500px;">
+			<rect x="0" y="0" width="100" height="100" fill="rgb(0,0,0)"/>
+			<defs>
+				<pattern id="Triangle" 
+						width="10" height="10"
+						patternUnits="userSpaceOnUse">
+					<polygon points="5,0 10,10 0,10" fill="rgba(255,255,255,1)"/>
+				</pattern>
+			</defs>
+			<circle cx="60" cy="60" r="50" fill="url(#Triangle)"/>
+			<text x="0" y="0" fill="rgba(255,255,255,1)">X</text>
+			<text xmlns="http://www.w3.org/2000/svg" id="Text" x="0" y="12" font-size="12" font-weight="bold" fill="rgb(255,255,255)">
+            Black &amp; White
+        </text>
+			<text>
+		</svg>
+		<svg version="1.1" viewBox="0 0 100 100" style="width:500px; height:500px;">
+			<defs>
+				<pattern id="Triangle" width="10" height="10" patternUnits="userSpaceOnUse">
+					<polygon points="5,0 10,10 0,10" fill="rgba(255,255,255,1)"/>
+				</pattern>
+				<pattern id="smallTriangle" width="6" height="6" patternUnits="userSpaceOnUse">
+					<polygon points="1.5,0 3,3 0,3" fill="rgba(255,255,255,1)">
+				</pattern>
+				<pattern id="helloWorld" width="2" height="2" patternUnits="userSpaceOnUse">
+					<text x="0" y="2" fill="rgba(255,255,255,2)" font-size="2">X</text>
+				</pattern>
+			</defs>
+			<mask id="pattern">
+				<circle cx="60" cy="60" r="50" fill="url(#helloWorld)"/>
+			</mask>
+			<image xlink:href="img/fxlogo.png" x="0" y="0" height="100" width="100" mask="url(#pattern)"/>
+			
+
+		</svg> -->
+
+	</body>
+</html>
